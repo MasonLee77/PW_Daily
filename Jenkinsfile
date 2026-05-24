@@ -63,6 +63,9 @@ pipeline {
         }
 
         stage('Setup Node.js') {
+            tools {
+                    nodejs 'NodeJS 26'  // Matches Jenkins NodeJS config
+            }
             steps {
                 script {
                     echo '📦 Setting up Node.js environment...'
