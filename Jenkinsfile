@@ -38,8 +38,6 @@ pipeline {
         timeout(time: 30, unit: 'MINUTES')
         // Disable concurrent builds for this project
         disableConcurrentBuilds()
-        // Add timestamps to console output
-        timestamps()
     }
 
     triggers {
@@ -177,7 +175,8 @@ EOF
                     reportFiles: 'index.html',
                     reportName: 'Playwright HTML Report',
                     keepAll: true,
-                    allowMissing: false
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true
                 ])
                 
                 // Archive Allure Report (requires Allure Jenkins Plugin)
@@ -188,7 +187,8 @@ EOF
                             reportFiles: 'index.html',
                             reportName: 'Allure Test Report',
                             keepAll: true,
-                            allowMissing: true
+                            allowMissing: true,
+                            alwaysLinkToLastBuild: true
                         ])
                     }
                 }
