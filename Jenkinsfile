@@ -80,6 +80,9 @@ pipeline {
         }
 
         stage('Install Dependencies') {
+            tools {
+                    nodejs 'NodeJS 26'  // Matches Jenkins NodeJS config
+            }
             steps {
                 script {
                     echo '📥 Installing npm dependencies...'
@@ -91,6 +94,9 @@ pipeline {
         }
 
         stage('Install Playwright Browsers') {
+            tools {
+                    nodejs 'NodeJS 26'  // Matches Jenkins NodeJS config
+            }
             steps {
                 script {
                     echo '🌐 Installing Playwright browsers...'
@@ -125,6 +131,9 @@ EOF
         }
 
         stage('Run Tests') {
+            tools {
+                    nodejs 'NodeJS 26'  // Matches Jenkins NodeJS config
+            }
             steps {
                 script {
                     echo '🚀 Running Playwright tests...'
