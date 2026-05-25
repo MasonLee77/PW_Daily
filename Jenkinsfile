@@ -229,11 +229,11 @@ EOF
                     echo '📈 Publishing Allure trends...'
                 }
                 // This requires the Allure Jenkins Plugin
-                allure([
-                    jdk: '',
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
-                ])
+                // allure([
+                //     jdk: '',
+                //     reportBuildPolicy: 'ALWAYS',
+                //     results: [[path: 'allure-results']]
+                // ])
             }
         }
     }
