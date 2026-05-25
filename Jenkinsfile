@@ -157,6 +157,9 @@ EOF
             when {
                 expression { params.PUBLISH_REPORTS == true }
             }
+            tools {
+                    nodejs 'NodeJS 26'  // Matches Jenkins NodeJS config
+            }
             steps {
                 script {
                     echo '📊 Generating Allure report...'
@@ -176,6 +179,9 @@ EOF
         stage('Publish Artifacts') {
             when {
                 expression { params.PUBLISH_REPORTS == true }
+            }
+            tools {
+                    nodejs 'NodeJS 26'  // Matches Jenkins NodeJS config
             }
             steps {
                 script {
