@@ -46,6 +46,16 @@ jobs:
           ALLURE_RESULTS_DIR=allure-results
           EOF
 
+      - name: Check site connectivity
+        run: |
+          echo "Checking https://material.playwrightvn.com/ connectivity"
+          if ! curl -I --max-time 20 https://material.playwrightvn.com/ -sSf -o /dev/null; then
+            echo "ERROR: https://material.playwrightvn.com/ is not reachable from this runner"
+            echo "Dumping verbose curl output for debugging:"
+            curl -v --max-time 20 https://material.playwrightvn.com/ || true
+            exit 1
+          fi
+
       - name: Run Playwright tests
         run: npm test
         env:
