@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main, develop ]
   schedule:
-    - cron: '30 23 * * *'
+    - cron: '30 03 * * *'
 
 jobs:
   test:
@@ -46,14 +46,14 @@ jobs:
           ALLURE_RESULTS_DIR=allure-results
           EOF
 
-      - name: Check site connectivity
+      - name: Check site connectivity (informational)
+        continue-on-error: true
         run: |
-          echo "Checking https://material.playwrightvn.com/ connectivity"
-          if ! curl -I --max-time 20 https://material.playwrightvn.com/ -sSf -o /dev/null; then
-            echo "ERROR: https://material.playwrightvn.com/ is not reachable from this runner"
-            echo "Dumping verbose curl output for debugging:"
-            curl -v --max-time 20 https://material.playwrightvn.com/ || true
-            exit 1
+          echo "Checking https://material.playwrightvn.com/ connectivity (informational only)"
+          if curl -I --max-time 10 --connect-timeout 5 https://material.playwrightvn.com/ -sSf -o /dev/null 2>&1; then
+            echo "✓ Site is reachable"
+          else
+            echo "⚠ Site may be slow/unreachable from this runner, tests will retry with longer timeouts"
           fi
 
       - name: Run Playwright tests
